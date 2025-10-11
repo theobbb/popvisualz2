@@ -2,7 +2,7 @@
 
 @font-face {
 	font-family: 'Fliege Mono';
-	src: url('fonts/FliegeMonoVF.woff2') format('woff2-variations');
+	src: url('/fonts/FliegeMonoVF.woff2') format('woff2-variations');
 	/* or maybe .ttf, depending on what you converted it to */
 	font-weight: 100 900;
 	font-style: normal;
