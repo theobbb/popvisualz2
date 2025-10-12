@@ -1,80 +1,26 @@
-<script>
-	import { onMount } from 'svelte';
+<script lang="ts">
+	import Pictogram from '$lib/pictogram.svelte';
 	import Contact from './contact.svelte';
-
-	let mounted = $state(false);
-	onMount(() => {
-		mounted = true;
-
-		if (Hls.isSupported()) {
-			const video = document.getElementById('video');
-			const hls = new Hls();
-			hls.attachMedia(video);
-			hls.on(Hls.Events.MEDIA_ATTACHED, () => {
-				hls.loadSource(
-					'https://customer-4435sevcnadevbkp.cloudflarestream.com/70df67665622329fa0bb13143a547da3/manifest/video.m3u8'
-				);
-			});
-		}
-	});
+	import Reel from './reel.svelte';
 </script>
 
-<div class="pointer-events-none fixed inset-0 -z-1">
-	<video
-		id="video"
-		autoplay
-		muted
-		loop
-		playsinline
-		preload="auto"
-		class={[
-			'absolute top-0 left-0 h-full w-full object-cover opacity-0',
-			mounted && 'opacity-20',
-			'transition duration-300 ease-in'
-		]}
-	>
-	</video>
-</div>
+<Reel />
 
 <div class="grid-8 pointer-events-none fixed inset-0 flex items-end mix-blend-difference">
-	<div class="bg-dot pointer-events-auto col-span-5 mt-20 mb-6 ml-8 text-6xl">
-		Director, Filmmaker, Editor <br />
+	<div
+		style="font-family: 'Orbitron';"
+		class="bg-dot pointer-events-auto col-span-5 mt-20 mb-6 ml-8 text-6xl leading-18"
+	>
+		<div>
+			<div class="text-7xl">VIDEO-<br /> GRAPHER</div>
+			<Pictogram src="3" size={16} track_size={3} offset={[3.8, -7]} />
+		</div>
+		Director,
+		<Pictogram src="1" size={16} track_size={3} offset={[-2.8, -7]} />
+		Filmmaker, <Pictogram src="2" size={16} track_size={3} offset={[3.8, -7]} />
+
+		<br />
 		*of many things*
 	</div>
 	<div class="col-span-2 mb-24"><Contact /></div>
 </div>
-<!-- <div class="relative -mx-1.5 mt-12 w-full" style="height: calc(100svh - 16rem);">
-	<video
-		autoplay
-		muted
-		loop
-		playsinline
-		preload="auto"
-		class={[
-			'absolute top-0 left-0 h-full w-full object-cover opacity-0',
-			mounted && 'opacity-100',
-			'transition duration-300 ease-in'
-		]}
-	>
-		<source src="/videos/reel-small-2.mp4" type="video/mp4" />
-	</video>
-</div> -->
-
-<!-- <div class="grid-8">
-	<div class="col-span-5 mt-20 text-4xl">
-		Director, Filmmaker, Editor <br />
-		of many things
-	</div>
-	<Contact />
-</div> -->
-
-<!-- <mux-player
-		playback-id="qRls02Bvl9Piha6rp99a82jaRiJx015hZbqSpHF02vLkfU"
-		autoplay
-		muted
-		loop
-		playsinline
-		stream-type="on-demand"
-		max-resolution="1080p"
-		style="position: fixed; top: 0; left: 0; min-width: 100vw; min-height: 100vh; object-fit: cover; z-index: -1;"
-	></mux-player> -->
