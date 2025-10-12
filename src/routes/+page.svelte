@@ -5,11 +5,23 @@
 	let mounted = $state(false);
 	onMount(() => {
 		mounted = true;
+
+		if (Hls.isSupported()) {
+			const video = document.getElementById('video');
+			const hls = new Hls();
+			hls.attachMedia(video);
+			hls.on(Hls.Events.MEDIA_ATTACHED, () => {
+				hls.loadSource(
+					'https://customer-4435sevcnadevbkp.cloudflarestream.com/70df67665622329fa0bb13143a547da3/manifest/video.m3u8'
+				);
+			});
+		}
 	});
 </script>
 
 <div class="pointer-events-none fixed inset-0 -z-1">
 	<video
+		id="video"
 		autoplay
 		muted
 		loop
@@ -21,10 +33,6 @@
 			'transition duration-300 ease-in'
 		]}
 	>
-		<source
-			src="https://watch.cloudflarestream.com/70df67665622329fa0bb13143a547da3"
-			type="video/mp4"
-		/>
 	</video>
 </div>
 
