@@ -1,19 +1,19 @@
-<header class="grid-8 leading-5">
-	<div class="text-right">Directed by</div>
-	<div>Pop Visualz</div>
+<header class="grid-8 mt-1.5 mix-blend-difference">
+	<div class="text-right opacity-50">Directed by</div>
+	<a href="/">Pop Visualz</a>
 	<div class="col-span-2"></div>
 
-	<a href="/featured-projects" class="hover:bg-white hover:text-black">
+	<a href="/featured-projects" class="">
 		Featured <br /> Projects
 	</a>
 
-	<a href="/featured-projects" class="hover:bg-white hover:text-black">
+	<a href="/social-media-content" class="">
 		Social Media <br /> Content
 	</a>
 
-	<a href="/featured-projects" class="hover:bg-white hover:text-black">
+	<a href="/the-writer" class="">
 		The Writer <br /> (short film)
 	</a>
 
-	<a href="/featured-projects" class="hover:bg-white hover:text-black"> Contact </a>
+	<a href="/contact" class=""> Contact </a>
 </header>
