@@ -2,6 +2,8 @@
 	import { onMount } from 'svelte';
 	import Hls from 'hls.js';
 
+	const autoplay = true;
+
 	const src = 'https://stream.mux.com/yBbPMzMQNcsoGafylO01lGeXOOGwQB7CEpvRCVaaXCVY.m3u8';
 
 	let hls: Hls | null = null;
@@ -11,7 +13,8 @@
 	let mounted = $state(false);
 	onMount(() => {
 		mounted = true;
-		return;
+		if (!autoplay) return;
+
 		if (!video) return;
 
 		if (Hls.isSupported()) {
@@ -52,7 +55,7 @@
 		preload="auto"
 		class={[
 			'absolute top-0 left-0 h-full w-full object-cover opacity-0',
-			mounted && 'opacity-20',
+			mounted && 'opacity-100',
 			'transition duration-300 ease-in'
 		]}
 	>

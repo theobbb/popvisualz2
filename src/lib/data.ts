@@ -5,3 +5,13 @@ export const social_links = [
 	['email', 'popvisualz@gmail.com', 'mailto:popvisualz@gmail.com'],
 	['phone', '514 466 6970', 'tel:5144666970']
 ];
+
+export const partners = [
+	'Universal Music record Label',
+	'Sony Music UK ',
+	'Converse',
+	'Montreality',
+	'LeWarmupFM',
+	'OneTrackMind',
+	'Essentrix'
+];

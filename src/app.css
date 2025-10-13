@@ -63,11 +63,17 @@
 }
 
 html {
+	background-color: black;
+	color: rgb(224, 224, 224);
+
+	font-size: 16px;
+}
+
+html,
+.font-1 {
 	font-family: 'Fliege Mono';
 	letter-spacing: -2%;
 	line-height: 113%;
-	background-color: black;
-	color: rgb(224, 224, 224);
 	font-weight: 500;
 }
 
@@ -75,4 +81,13 @@ html {
 	display: grid;
 	grid-template-columns: repeat(8, minmax(0, 1fr));
 	gap: 1.5rem;
+}
+
+.font-2 {
+	font-family: 'Orbitron';
+	letter-spacing: 4%;
+}
+
+.text-2 {
+	color: rgb(109, 109, 109);
 }
