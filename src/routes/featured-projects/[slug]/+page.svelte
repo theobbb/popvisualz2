@@ -49,16 +49,6 @@
 		</div>
 		<div class="grid-8 relative col-span-full h-full">
 			<div class="relative col-span-6 col-start-2 flex h-full items-center justify-center">
-				<!-- {#key index}
-					<iframe
-						title="player-{project.artist}-{project.name}"
-						src="https://player.mux.com/{project.video_playback_id}"
-						allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-						allowfullscreen={true}
-						autoplay={true}
-						style="aspect-ratio: {project.aspect_ratio}; height: 100%; max-width: 100%; border: 0;"
-					></iframe>
-				{/key} -->
 				{#key project.slug}
 					<Video {project} />
 				{/key}

@@ -1,5 +1,9 @@
 @import 'tailwindcss';
 
+@theme {
+	--breakpoint-lg: 72rem;
+}
+
 @font-face {
 	font-family: 'Fliege Mono';
 	src: url('/fonts/FliegeMonoVF.woff2') format('woff2-variations');
@@ -65,8 +69,8 @@
 html {
 	background-color: black;
 	color: rgb(224, 224, 224);
-
-	font-size: 16px;
+	-webkit-tap-highlight-color: unset;
+	font-size: clamp(14px, 1.5vw, 16px);
 }
 
 html,

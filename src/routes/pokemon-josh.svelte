@@ -5,7 +5,7 @@
 	const cx = { sub: 'uppercase font-semibold text-xs text-2' };
 </script>
 
-<div class=" max-w-50 border border-white/20 bg-black px-1.5">
+<div class="max-w-52 border border-white/20 bg-black px-1.5">
 	<div class="mb-3 flex justify-between gap-2 pt-1">
 		<div class={cx.sub}>NAME</div>
 		<div class="font-2 text-xl/6">JOSH POP</div>
@@ -24,7 +24,7 @@
 				target="_blank"
 			>
 				<div class={cx.sub}>{label}</div>
-				<div class="font-2 -translate-y-0.5 text-sm">{title}</div>
+				<div class="font-2 text-sm lg:-translate-y-0.5">{title}</div>
 			</a>
 		{/each}
 	</div>

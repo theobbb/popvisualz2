@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import Hls from 'hls.js';
 
-	const autoplay = false;
+	const autoplay = true;
 
 	const src = 'https://stream.mux.com/yBbPMzMQNcsoGafylO01lGeXOOGwQB7CEpvRCVaaXCVY.m3u8';
 
@@ -56,7 +56,7 @@
 		class={[
 			'absolute top-0 left-0 h-full w-full object-cover opacity-0',
 			mounted && 'opacity-100',
-			'transition duration-300 ease-in'
+			'transition duration-500 ease-in'
 		]}
 	>
 	</video>

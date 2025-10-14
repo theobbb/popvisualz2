@@ -62,11 +62,14 @@
 	/>
 </svelte:head>
 
-<div class="my-12 text-6xl/20 font-light">
+<div class="text-5xl font-light lg:text-6xl/20">
+	<div class="grid-16">
+		<div class="pointer-events-none opacity-0">*</div>
+	</div>
 	{#each projects as project, project_i}
 		<a class="grid-16 uppercase" href="featured-projects/{project.slug}">
 			{#each str[project_i].split('') as char, char_i}
-				<div class="relative flex items-center justify-center">
+				<div class="relative flex justify-start lg:items-center lg:justify-center">
 					<span>{char}</span>
 					<Video
 						src="{paths[project_i]}_{char_i + 1}"
@@ -81,7 +84,7 @@
 				class="flex items-center text-base/5 font-medium"
 				style="grid-column: span {text_col_span[project_i]} / span {text_col_span[project_i]};"
 			>
-				<div class="mt-5- ml-4">
+				<div class="mt-5- lg:ml-4">
 					<div>{project.artist}</div>
 					<div class="text-2">{project.date}</div>
 				</div>
@@ -99,6 +102,9 @@
 			{/each}
 		</a>
 	{/each}
+	<div class="grid-16">
+		<div class="pointer-events-none opacity-0">*</div>
+	</div>
 </div>
 
 <style>
@@ -108,5 +114,12 @@
 		grid-auto-rows: 5.2rem;
 		gap: 0.2rem;
 		margin-bottom: 0.2rem;
+	}
+
+	@media (max-width: 64rem) {
+		.grid-16 {
+			grid-template-columns: repeat(8, minmax(0, 1fr));
+			grid-auto-rows: 3rem;
+		}
 	}
 </style>
