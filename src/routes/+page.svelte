@@ -7,6 +7,14 @@
 	import Reel from './reel.svelte';
 </script>
 
+<svelte:head>
+	<title>PopVisualz - Videographer</title>
+	<meta
+		name="description"
+		content="I'm Josh Pop (PopVisualz), a Montréal-based video director, filmmaker, editor. I handle the entire visual process—from shooting and directing to the final edit. Check out the latest work."
+	/>
+</svelte:head>
+
 <Reel />
 
 <div class="pointer-events-none fixed inset-0">
@@ -75,7 +83,7 @@
 	</div>
 </div>
 
-<div class="fixed top-0 right-6 bottom-0 flex items-center">
+<!-- <div class="fixed top-2 right-6 z-100 flex items-center">
 	<PokemonJosh />
-</div>
+</div> -->
 <!-- <div class="col-span-2 mb-24"><Contact /></div> -->

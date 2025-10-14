@@ -1,79 +1,103 @@
 <script lang="ts">
 	import { projects } from '$lib/data';
-	import Char from './char.svelte';
-	import Info from './info.svelte';
+	import type { Project } from '$lib/types';
+	import { onMount } from 'svelte';
+	import Video from './video.svelte';
 
 	const str = [
-		'SHY SMITH-   FANSERVICE',
-		`  BONZA-BURNIN'`,
-		`      MATT OX-  HOLDING ME  DOWN`,
-		`SERANE- CHROME`,
-		`MIKE SHABB X PAYDRO 66-UNDER THE RUG`,
-		`ETERNL KURU- CHASE LES STARS`
+		'FAN SERVICE',
+		`BURNIN'`,
+		`HOLDING ME DOWN `,
+		`CHROME`,
+		`UNDER THE RUG`,
+		`CHASE LES STARS `
 	];
 
-	const paths = ['burnin', 'burnin', 'burnin', 'burnin', 'burnin', 'burnin'];
+	let videos: HTMLVideoElement[] = [];
 
-	function onmouseenter(ev: MouseEvent, project) {
-		ev.currentTarget.play();
+	const text_col_span = [2, 2, 2, 2, 3, 2];
+	const fillers = [3, 7, 0, 8, 0, 0];
+
+	const paths = [
+		'fan-service',
+		'burnin',
+		'holding-me-down',
+		'chrome',
+		'under-the-rug',
+		'chase-les-stars'
+	];
+
+	function onmouseenter(ev: MouseEvent, project: Project) {
+		const video = ev.currentTarget;
+		if (!video) return;
+		if (!(video instanceof HTMLVideoElement)) return;
+
+		video.play();
+		video.style.opacity = '1';
 	}
 
-	function onmouseleave(ev: MouseEvent, project) {
-		ev.currentTarget.pause();
-		ev.currentTarget.currentTime = 0;
+	function onmouseleave(ev: MouseEvent, project: Project) {
+		return;
+		const video = ev.currentTarget;
+		if (!video) return;
+		if (!(video instanceof HTMLVideoElement)) return;
+		video.pause();
+		video.currentTime = 0;
 	}
+
+	function loop() {}
+
+	onMount(() => {
+		videos = Array.from(document.querySelectorAll('video'));
+
+		loop();
+	});
 </script>
 
-<div class="my-12 text-6xl/18 font-light">
-	<!-- <div></div>
-	<div class="col-span-4 flex items-end">
-		<div>
-			<div class="text-4xl">Burnin</div>
-			<div>Bonza</div>
-			<div>25-10-2024</div>
-		</div>
-	</div> -->
+<svelte:head>
+	<title>Featured Projects - PopVisualz - Videographer</title>
+	<meta
+		name="description"
+		content="A showcase of my work. I conceive, direct, and execute precise visual projects—from concept to final frame. The selection of films and motion work by Josh Pop."
+	/>
+</svelte:head>
+
+<div class="my-12 text-6xl/20 font-light">
 	{#each projects as project, project_i}
 		<a class="grid-16 uppercase" href="featured-projects/{project.slug}">
-			<div class="col-span-2 text-base/5 font-medium">{project.artist}</div>
-			{#each project.name.split('') as char, char_i}
-				<div class="relative text-center">
-					{char}
-
-					<div class=" absolute inset-0 z-10 flex items-center justify-center">
-						<video
-							onclick={() => {
-								//alert(src)
-							}}
-							onmouseenter={(ev) => onmouseenter(ev, project)}
-							onmouseleave={(ev) => {
-								onmouseleave(ev, project);
-							}}
-							class=" h-36 w-36 opacity-0 transition duration-75 ease-in hover:opacity-100"
-							src="/videos/snapshots/{paths[project_i]}_{char_i + 1}.mp4"
-							muted
-							preload="metadata"
-							playsinline
-							loop
-						></video>
-					</div>
+			{#each str[project_i].split('') as char, char_i}
+				<div class="relative flex items-center justify-center">
+					<span>{char}</span>
+					<Video
+						src="{paths[project_i]}_{char_i + 1}"
+						onmouseenter={(ev: MouseEvent) => onmouseenter(ev, project)}
+						onmouseleave={(ev: MouseEvent) => {
+							onmouseleave(ev, project);
+						}}
+					/>
 				</div>
 			{/each}
-
-			<br />
-		</a>
-		<!-- <div class="grid-8 mt-4 mb-12 text-base/5 font-medium">
 			<div
-				class={[project_i == 0 && 'hidden']}
-				style="grid-column: span {project_i} / span {project_i};"
-			></div>
-			<div>{projects[project_i].artist} - <br />{projects[project_i].name}</div>
-			<div>{projects[project_i].date}</div>
-			<div>
-				<div><a>Watch Video +</a></div>
-				<div><a>Watch on Youtube +</a></div>
+				class="flex items-center text-base/5 font-medium"
+				style="grid-column: span {text_col_span[project_i]} / span {text_col_span[project_i]};"
+			>
+				<div class="mt-5- ml-4">
+					<div>{project.artist}</div>
+					<div class="text-2">{project.date}</div>
+				</div>
 			</div>
-		</div> -->
+			{#each { length: fillers[project_i] } as filler, filler_i}
+				<div class="relative flex h-full w-full items-center justify-center">
+					<Video
+						src="{paths[project_i]}_{16 - fillers[project_i] + filler_i + 1}"
+						onmouseenter={(ev: MouseEvent) => onmouseenter(ev, project)}
+						onmouseleave={(ev: MouseEvent) => {
+							onmouseleave(ev, project);
+						}}
+					/>
+				</div>
+			{/each}
+		</a>
 	{/each}
 </div>
 
@@ -81,5 +105,8 @@
 	.grid-16 {
 		display: grid;
 		grid-template-columns: repeat(16, minmax(0, 1fr));
+		grid-auto-rows: 5.2rem;
+		gap: 0.2rem;
+		margin-bottom: 0.2rem;
 	}
 </style>
