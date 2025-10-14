@@ -1,4 +1,4 @@
-<header class=" mix-blend-difference- relative z-20 mt-1.5">
+<header class="mix-blend-difference- sticky top-0 z-20 pt-1.5">
 	<nav class="grid-8">
 		<div class="text-right opacity-50">Directed by</div>
 		<a href="/">Pop Visualz</a>
