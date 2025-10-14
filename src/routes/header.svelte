@@ -26,7 +26,7 @@
 			<li class="max-lg:col-span-4">
 				<a href="/"> Pop Visualz </a>
 			</li>
-			<div class="col-span-1 2xl:col-span-2"></div>
+			<div class="col-span-2"></div>
 
 			{#each links as [link, href]}
 				<li class="max-w-32">
@@ -96,7 +96,7 @@
 ></div>
 <div
 	class={[
-		' fixed top-6.5 right-4 z-100 mt-1 opacity-0 max-lg:hidden',
+		' fixed top-12 right-4 z-100 mt-1 opacity-0 max-lg:hidden',
 		!pokemon_open && 'pointer-events-none',
 		pokemon_open && 'opacity-100',
 		'transition duration-75'
