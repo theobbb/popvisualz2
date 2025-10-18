@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { projects } from '$lib/data.js';
 	import type { Project } from '$lib/types.js';
-	import Video from './video.svelte';
+	import Video from '../../../lib/video.svelte';
 
 	const { data } = $props();
 
@@ -50,7 +50,7 @@
 		<div class="grid-8 relative col-span-full h-full">
 			<div class="relative col-span-6 col-start-2 flex h-full items-center justify-center">
 				{#key project.slug}
-					<Video {project} />
+					<Video autoplay playback_id={project.video_playback_id} />
 				{/key}
 			</div>
 		</div>

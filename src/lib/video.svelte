@@ -1,20 +1,46 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Hls from 'hls.js';
-	import type { Project } from '$lib/types';
 
-	const { project }: { project: Project } = $props();
+	const {
+		playback_id,
+		autoplay = false,
+		...props
+	}: { playback_id: string; autoplay?: boolean } = $props();
 
-	const src = $derived(`https://stream.mux.com/${project.video_playback_id}.m3u8`);
+	const src = $derived(`https://stream.mux.com/${playback_id}.m3u8`);
 
 	let hls: Hls | null = null;
 
 	let video: HTMLVideoElement | null = $state(null);
 
-	let mounted = $state(false);
+	let hovering = $state(false);
+	const show_controls = $derived(hovering);
 
+	const events = {
+		onended: () => {
+			if (!video) return;
+			video.currentTime = 0;
+			video.pause();
+		},
+		onmouseenter: () => {
+			hovering = true;
+		},
+		onmouseleave: () => {
+			hovering = false;
+		}
+	};
+
+	function onended() {
+		if (video) {
+			video.currentTime = 0; // Go back to the beginning
+			video.pause(); // Optional, but good for UX
+		}
+	}
+	function onmouseenter() {}
+
+	let mounted = $state(false);
 	onMount(() => {
-		console.log('mount');
 		mounted = true;
 
 		if (!video) return;
@@ -24,6 +50,8 @@
 			hls.loadSource(src);
 			hls.attachMedia(video);
 
+			if (!autoplay) return;
+
 			hls.on(Hls.Events.MANIFEST_PARSED, () => {
 				if (!video) return;
 				video.play();
@@ -32,6 +60,7 @@
 			// Native HLS support (e.g., Safari/iOS)
 			video.src = src;
 
+			if (!autoplay) return;
 			video.play();
 		} else {
 			console.error('HLS is not supported in this browser.');
@@ -47,15 +76,19 @@
 </script>
 
 <video
+	{...props}
 	bind:this={video}
 	id="video"
+	{...events}
 	controls
+	muted
 	playsinline
 	preload="auto"
 	class={[
-		'absolute top-0 left-0 h-full w-full object-contain opacity-0',
+		'absolute top-0 left-0 h-full w-full object-contain accent-red-500 opacity-0',
 		mounted && 'opacity-100',
 		'transition duration-300 ease-in'
 	]}
+	style="accent-color: red;"
 >
 </video>

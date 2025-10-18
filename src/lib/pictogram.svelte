@@ -1,5 +1,27 @@
 <script lang="ts">
-	const { src, size, offset }: { src: string; size: number; offset: [number, number] } = $props();
+	const { src }: { src: string } = $props();
+</script>
+
+<div class="pointer-events-auto absolute aspect-square w-full">
+	<img
+		alt="pixel-picto"
+		class="peer absolute inset-0 h-full w-full grayscale"
+		style=" image-rendering: pixelated;"
+		src="/pictograms/{src}-pixel.webp"
+	/>
+	<img
+		alt="picto"
+		class="pointer-events-none absolute inset-0 opacity-0 transition duration-75 ease-in peer-hover:opacity-100"
+		src="/pictograms/{src}.webp"
+	/>
+</div>
+
+<!-- <script lang="ts">
+	const {
+		src,
+		size,
+		offset = [0, 0]
+	}: { src: string; size: number; offset?: [number, number] } = $props();
 </script>
 
 <div
@@ -18,4 +40,4 @@
 		class="pointer-events-none absolute inset-0 opacity-0 transition duration-75 ease-in peer-hover:opacity-100"
 		src="/pictograms/{src}.webp"
 	/>
-</div>
+</div> -->

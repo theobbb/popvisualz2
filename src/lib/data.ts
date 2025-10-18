@@ -16,7 +16,7 @@ export const projects: Project[] = [
 		video_playback_id: 'MWhqMkri7np02U8ZFxWHxTKK4oygJ6vLi4ab3ogUEcw8',
 		aspect_ratio: '4/3',
 		date: '04-07-2025',
-		youtube_url: 'https://www.youtube.com/watch?v=Ktto1YlSymQ&list=RDKtto1YlSymQ&start_radio=1'
+		youtube_url: 'https://www.youtube.com/watch?v=Ktto1YlSymQ'
 	},
 	{
 		name: `Burnin'`,
@@ -25,7 +25,7 @@ export const projects: Project[] = [
 		video_playback_id: 'JmpT1uLuVyx00eOvjZHPBas9SRiiE6JU9WNWPe6Ff1WE',
 		aspect_ratio: '16/9',
 		date: '25-10-2024',
-		youtube_url: 'https://www.youtube.com/watch?v=Da1wknoIVdo&list=RDDa1wknoIVdo&start_radio=1'
+		youtube_url: 'https://www.youtube.com/watch?v=5gMgIqD0Cd4'
 	},
 	{
 		name: 'Holding Me Down',
@@ -34,7 +34,7 @@ export const projects: Project[] = [
 		video_playback_id: 'KtM9OWgLpcZMPJpzkgM24zKyv83J6ghHz3uoyGIA5hI',
 		aspect_ratio: '16/9',
 		date: '08-03-2024',
-		youtube_url: 'https://www.youtube.com/watch?v=Da1wknoIVdo&list=RDDa1wknoIVdo&start_radio=1'
+		youtube_url: 'https://www.youtube.com/watch?v=4PFbE2lteAI'
 	},
 	{
 		name: 'Chrome',
@@ -43,7 +43,7 @@ export const projects: Project[] = [
 		video_playback_id: '023R7Pm01fM2F982LDqBEhnVRYIzN00HLAjL1aAal4ikOw',
 		aspect_ratio: '16/9',
 		date: '30-04-2025',
-		youtube_url: 'https://www.youtube.com/watch?v=Da1wknoIVdo&list=RDDa1wknoIVdo&start_radio=1'
+		youtube_url: 'https://www.youtube.com/watch?v=9GWy2Ri_Otw'
 	},
 	{
 		name: 'Under the Rug',
@@ -52,7 +52,7 @@ export const projects: Project[] = [
 		video_playback_id: '00TYf01pMkuHhaK00rU00i4Smskq1IbaFR6M6lMTGR8t1wg',
 		aspect_ratio: '3/2',
 		date: '11-10-2024',
-		youtube_url: 'https://www.youtube.com/watch?v=8IRQNIsdaEE&list=RD8IRQNIsdaEE&start_radio=1'
+		youtube_url: 'https://www.youtube.com/watch?v=8IRQNIsdaEE'
 	},
 	{
 		name: 'Chase les stars',
@@ -61,7 +61,7 @@ export const projects: Project[] = [
 		video_playback_id: 'le5JYJ8LLaRz3fLbLF8a6vL2Rgq7kia2XdiMtW8Cw5s',
 		aspect_ratio: '16/9',
 		date: '15-06-2024',
-		youtube_url: 'https://www.youtube.com/watch?v=Da1wknoIVdo&list=RDDa1wknoIVdo&start_radio=1'
+		youtube_url: 'https://www.youtube.com/watch?v=Da1wknoIVdo'
 	}
 ];
 

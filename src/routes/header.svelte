@@ -8,10 +8,12 @@
 	let menu_open = $state(false);
 
 	const links = [
+		['Home (Reel)', '/'],
 		['Featured Projects', '/featured-projects'],
-		['Social Media Content', '/social-media-content'],
 		['The Writer (short film)', '/the-writer']
 	];
+
+	const current_link = $derived(links.find((link) => page.route.id == link[1]));
 
 	onNavigate((nav) => {
 		pokemon_open = nav.to?.route.id == '/';
@@ -19,7 +21,7 @@
 	});
 </script>
 
-<header class="mix-blend-difference- sticky top-0 z-20 pt-1.5">
+<header class="sticky top-0 z-20 pt-1.5 mix-blend-difference" style="line-height: 113%;">
 	<nav class="max-lg:hidden">
 		<ul class="grid-8">
 			<div class="text-2 text-right">Directed by</div>
@@ -29,7 +31,15 @@
 			<div class="col-span-2"></div>
 
 			{#each links as [link, href]}
-				<li class="max-w-32">
+				<li class="group max-w-32">
+					<div
+						class={[
+							'absolute size-2.5 -translate-x-5 translate-y-1 rounded-full bg-white ',
+							current_link?.[1] == href ? 'opacity-100' : 'opacity-0 group-hover:opacity-50',
+							'transition duration-100'
+						]}
+					></div>
+
 					<a {href}>
 						{link}
 					</a>

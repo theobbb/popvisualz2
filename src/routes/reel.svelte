@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import Hls from 'hls.js';
 
-	const autoplay = true;
+	const autoplay = false;
 
 	const src = 'https://stream.mux.com/yBbPMzMQNcsoGafylO01lGeXOOGwQB7CEpvRCVaaXCVY.m3u8';
 
