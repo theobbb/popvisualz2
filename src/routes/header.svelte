@@ -5,7 +5,7 @@
 
 	let pokemon_open = $state(page.route.id == '/');
 
-	let menu_open = $state(false);
+	let menu_open = $state(true);
 
 	const links = [
 		['Home (Reel)', '/'],
@@ -69,13 +69,13 @@
 
 	<div
 		class={[
-			' absolute z-100 flex w-full justify-between text-2xl ',
+			' absolute z-100 flex w-full justify-between gap-6 text-2xl ',
 			!menu_open && 'pointer-events-none opacity-0',
 			menu_open && 'pointer-events-auto',
 			'transition duration-75'
 		]}
 	>
-		<div>
+		<div class="">
 			<div class="w-fit opacity-0">*</div>
 			<div class="w-fit opacity-0">*</div>
 			<div>
@@ -84,12 +84,16 @@
 		</div>
 		<div class={['mr-1 text-right ']}>
 			<div class="opacity-0">*</div>
-			<div class="opacity-0">*</div>
 
-			<a href="/" class="block"> Home </a>
 			{#each links as [link, href]}
 				<div class="opacity-0">*</div>
-
+				<div
+					class={[
+						'absolute size-2.5 -translate-x-3 translate-y-2.5 rounded-full bg-white ',
+						current_link?.[1] == href ? 'opacity-100' : 'opacity-0 group-hover:opacity-50',
+						'transition duration-100'
+					]}
+				></div>
 				<a class="block max-w-44" {href}>
 					{link}
 				</a>
