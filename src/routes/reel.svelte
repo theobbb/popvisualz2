@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Hls from 'hls.js';
+	import { dev } from '$app/environment';
 
-	const autoplay = false;
+	const autoplay = !dev;
 
 	const src = 'https://stream.mux.com/yBbPMzMQNcsoGafylO01lGeXOOGwQB7CEpvRCVaaXCVY.m3u8';
 
