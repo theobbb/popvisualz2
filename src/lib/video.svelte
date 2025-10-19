@@ -31,14 +31,6 @@
 		}
 	};
 
-	function onended() {
-		if (video) {
-			video.currentTime = 0; // Go back to the beginning
-			video.pause(); // Optional, but good for UX
-		}
-	}
-	function onmouseenter() {}
-
 	let mounted = $state(false);
 	onMount(() => {
 		mounted = true;

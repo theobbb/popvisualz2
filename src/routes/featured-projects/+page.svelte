@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import Video from './video.svelte';
 	import type { Attachment } from 'svelte/attachments';
+	import Hls from 'hls.js';
 
 	const dev_pause_loop = true;
 
@@ -44,9 +45,9 @@
 	}
 
 	function play_video(video: HTMLVideoElement) {
-		if (!video.src) {
-			video.src = '/videos/snapshots/' + video.id + '.mp4';
-		}
+		// if (!video.src) {
+		// 	video.src = '/videos/snapshots/' + video.id + '.mp4';
+		// }
 
 		video.play();
 		video.style.opacity = '1';
