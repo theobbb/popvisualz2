@@ -3,9 +3,8 @@
 	import { onMount } from 'svelte';
 	import Video from './video.svelte';
 	import type { Attachment } from 'svelte/attachments';
-	import Hls from 'hls.js';
 
-	const dev_pause_loop = true;
+	const dev_pause_loop = false;
 
 	const chars = [
 		'FAN______SERVICE__',
@@ -18,13 +17,14 @@
 
 	let video_map = new Map<string, HTMLVideoElement>();
 
-	let n_video_playing: number = 0;
+	let user_interacted: boolean = false;
 
 	function onmouseenter(ev: MouseEvent) {
 		const video = ev.currentTarget;
 		if (!video) return;
 		if (!(video instanceof HTMLVideoElement)) return;
 
+		if (!user_interacted) user_interacted = true;
 		clear_loop();
 		play_video(video);
 	}
@@ -35,9 +35,6 @@
 		if (!(video instanceof HTMLVideoElement)) return;
 
 		video.style.opacity = '0';
-		n_video_playing--;
-
-		if (n_video_playing > 0) return;
 
 		if (timeout_loop != null) return;
 		console.log('restart loop');
@@ -45,28 +42,31 @@
 	}
 
 	function play_video(video: HTMLVideoElement) {
-		// if (!video.src) {
-		// 	video.src = '/videos/snapshots/' + video.id + '.mp4';
-		// }
-
 		video.play();
 		video.style.opacity = '1';
-		n_video_playing++;
 	}
 
-	const delay = 3000;
+	const delay = 1000;
 
 	let cursor: number = 0;
 
 	const char_map = [
-		[2, 4, 6, 3, 5, 4],
-		[3, 1, 1, 6, 5, 8],
-		[4, 7, 5, 9, 5, 1]
+		[5, 12, 8, 3, 16, 7],
+		[9, 2, 14, 6, 11, 4],
+		[17, 5, 10, 13, 8, 1],
+		[3, 15, 9, 12, 7, 18],
+		[14, 6, 2, 11, 4, 16],
+		[10, 8, 17, 5, 13, 9],
+		[7, 3, 15, 1, 12, 14],
+		[16, 11, 4, 9, 18, 2],
+		[8, 13, 6, 10, 5, 17],
+		[12, 7, 9, 3, 15, 11]
 	];
 
 	let timeout_loop: ReturnType<typeof setTimeout> | null = null;
 	function loop() {
 		if (dev_pause_loop) return;
+		if (user_interacted) return;
 		const sequence = char_map[cursor];
 
 		sequence.forEach((id, i) => {
@@ -146,10 +146,17 @@
 					class="relative col-span-3 col-start-2 aspect-video w-full sm:col-span-1 sm:col-start-1"
 				>
 					<img
-						class="absolute h-full w-full object-cover"
+						class="peer absolute h-full w-full object-cover"
 						alt="{project.name} by {project.artist}"
 						src="/images/thumbnails/{project.slug}.webp"
 					/>
+					<div
+						class={[
+							'pointer-events-none absolute top-0 left-0 size-2.5 -translate-x-6 translate-y-1 rounded-full bg-white max-lg:hidden ',
+							'opacity-0 peer-hover:opacity-100',
+							'transition duration-100'
+						]}
+					></div>
 				</div>
 
 				<div

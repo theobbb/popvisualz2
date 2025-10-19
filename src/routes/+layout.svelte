@@ -15,7 +15,7 @@
 <div class="mx-1.5">
 	<Header />
 	{@render children?.()}
-	<!-- {#if page.route.id != '/'}
+	{#if page.route.id != '/'}
 		<Footer />
-	{/if} -->
+	{/if}
 </div>

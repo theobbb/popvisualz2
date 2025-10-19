@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { dev } from '$app/environment';
 	import { projects } from '$lib/data.js';
 	import IconYoutube from '$lib/icons/icon-youtube.svelte';
 	import type { Project } from '$lib/types.js';
@@ -72,10 +73,17 @@
 			<div
 				class={[
 					cx.a,
-					'col-span-2 max-md:col-span-3 max-md:col-start-7 max-md:row-start-1 md:text-right'
+					'relative col-span-2 max-md:col-span-3 max-md:col-start-7 max-md:row-start-1 md:text-right'
 				]}
 			>
-				<a href="/featured-projects">Close(x)</a>
+				<a href="/featured-projects" class="peer"> Close(x) </a>
+				<div
+					class={[
+						'pointer-events-none absolute top-0 right-0 size-2.5 -translate-x-21 translate-y-1 rounded-full bg-white ',
+						'opacity-0 peer-hover:opacity-100',
+						'transition duration-100'
+					]}
+				></div>
 			</div>
 		</div>
 		<div class="grid-8 relative h-full">
@@ -83,12 +91,12 @@
 				class="relative col-span-full flex h-full w-full items-center justify-center xl:col-span-6 xl:col-start-2"
 			>
 				{#key project.slug}
-					<Video autoplayy playback_id={project.video_playback_id} />
+					<Video autoplay={!dev} playback_id={project.video_playback_id} />
 				{/key}
 			</div>
 		</div>
 		<div class="mt-3 text-right">
-			<a href={project.youtube_url} target="_blank">Watch on<br /> Youtube (+)</a>
+			<a href={project.youtube_url} target="_blank">Watch on<br /> Youtube(+)</a>
 		</div>
 	</div>
 </div>
