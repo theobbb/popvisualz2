@@ -1,11 +1,11 @@
 <script>
-	import { afterNavigate, beforeNavigate, onNavigate } from '$app/navigation';
+	import { onNavigate } from '$app/navigation';
 	import { page } from '$app/state';
 	import PokemonJosh from './pokemon-josh.svelte';
 
 	let pokemon_open = $state(page.route.id == '/');
 
-	let menu_open = $state(true);
+	let menu_open = $state(false);
 
 	const links = [
 		['Home (Reel)', '/'],
