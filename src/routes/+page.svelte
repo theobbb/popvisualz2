@@ -97,7 +97,7 @@
 			class={[
 				'font-1 text-2 w-fit font-normal! lowercase',
 				'-mt-[9vw] max-md:translate-x-[45vw] max-md:text-[3vw]/[3vw]! max-md:font-light',
-				'md:-mt-7 md:translate-x-63 md:text-2xl'
+				'md:-mt-7 md:translate-x-63 md:text-2xl md:max-[1118px]:-translate-y-10'
 			]}
 		>
 			<span class="inline-block translate-y-0.5 md:translate-y-2 md:text-3xl"><IconArrow /></span>
