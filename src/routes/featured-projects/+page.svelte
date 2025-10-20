@@ -150,6 +150,7 @@
 						alt="{project.name} by {project.artist}"
 						src="/images/thumbnails/{project.slug}.webp"
 					/>
+
 					<div
 						class={[
 							'pointer-events-none absolute top-0 left-0 size-2.5 -translate-x-6 translate-y-1 rounded-full bg-white max-lg:hidden ',
