@@ -18,6 +18,14 @@
 	};
 </script>
 
+<svelte:head>
+	<title>{project.name} by {project.artist} - Featured Projects - PopVisualz - Videographer</title>
+	<meta
+		name="description"
+		content="A showcase of my work. I conceive, direct, and execute precise visual projects—from concept to final frame. The selection of films and motion work by Josh Pop."
+	/>
+</svelte:head>
+
 <div class=" fixed inset-0 z-200 bg-black px-1.5">
 	<div class="grid h-full grid-rows-[auto_1fr_auto] gap-6 py-1">
 		<div class="grid-8">
