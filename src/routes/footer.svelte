@@ -30,6 +30,6 @@
 	<div
 		class="text-2 col-span-4 translate-y-0.5 pr-1.5 text-right max-md:-mt-4 md:col-span-2 xl:col-span-1"
 	>
-		<a href={social_links[3][2]}>Website by 3xw </a>
+		<a href="https://tripledoubleve.ca/" target="_blank">Website by 3xw </a>
 	</div>
 </div>
