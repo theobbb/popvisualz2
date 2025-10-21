@@ -14,7 +14,7 @@
 
 /* orbitron-regular - latin */
 @font-face {
-	font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+	/* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
 	font-family: 'Orbitron';
 	font-style: normal;
 	font-weight: 400;
@@ -23,7 +23,7 @@
 
 /* orbitron-500 - latin */
 @font-face {
-	font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+	/* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
 	font-family: 'Orbitron';
 	font-style: normal;
 	font-weight: 500;
@@ -32,7 +32,7 @@
 
 /* orbitron-600 - latin */
 @font-face {
-	font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+	/* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
 	font-family: 'Orbitron';
 	font-style: normal;
 	font-weight: 600;
@@ -41,7 +41,7 @@
 
 /* orbitron-700 - latin */
 @font-face {
-	font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+	/* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
 	font-family: 'Orbitron';
 	font-style: normal;
 	font-weight: 700;
@@ -50,7 +50,7 @@
 
 /* orbitron-800 - latin */
 @font-face {
-	font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+	/* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
 	font-family: 'Orbitron';
 	font-style: normal;
 	font-weight: 800;
@@ -59,7 +59,7 @@
 
 /* orbitron-900 - latin */
 @font-face {
-	font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+	/* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
 	font-family: 'Orbitron';
 	font-style: normal;
 	font-weight: 900;
