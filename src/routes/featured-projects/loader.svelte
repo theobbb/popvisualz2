@@ -9,13 +9,18 @@
 	const loader_progress_total = 7;
 	let loader_progress = $state(0);
 
-	let isLoading = true;
 	let loaded_assets = 0;
 	let total_assets = 0;
 
 	function on_asset_load() {
 		loaded_assets++;
 		loader_progress = Math.round((loaded_assets / total_assets) * loader_progress_total);
+	}
+
+	function exit() {
+		document.body.style.overflow = '';
+		onloaded();
+		console.log('end');
 	}
 
 	onMount(() => {
@@ -63,14 +68,15 @@
 		Promise.all(asset_urls.map(load_asset))
 			.then(() => {
 				// All assets are loaded, update state and start the animation loop
-				document.body.style.overflow = '';
-				onloaded();
+				exit();
 			})
 			.catch((error) => {
 				console.error('Failed to load assets:', error);
 				// Handle error, maybe show a message
-				isLoading = false;
+				exit();
 			});
+
+		return exit;
 	});
 </script>
 

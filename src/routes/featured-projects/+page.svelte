@@ -111,6 +111,7 @@
 		if (ctx.loaded) loop();
 
 		return () => {
+			document.body.style.overflow = '';
 			clear_loop();
 		};
 	});
