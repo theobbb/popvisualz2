@@ -59,7 +59,7 @@
 					img.src = url;
 				} else if (url.endsWith('.mp4')) {
 					const video = document.createElement('video');
-					video.onloadeddata = () => {
+					video.oncanplaythrough = () => {
 						on_asset_load();
 						resolve();
 					};
