@@ -37,7 +37,6 @@
 		video.style.opacity = '0';
 
 		if (timeout_loop != null) return;
-		console.log('restart loop');
 		loop();
 	}
 
@@ -101,24 +100,20 @@
 		};
 	};
 
-	const reveal: Attachment = (el) => {
-		if (!el) return;
-		if (!(el instanceof HTMLDivElement)) return;
+	function onloaded() {
+		state.loaded = true;
 
+		if (timeout_loop) return;
 		loop();
+	}
+
+	onMount(() => {
+		if (state.loaded) loop();
 
 		return () => {
 			clear_loop();
 		};
-	};
-
-	// onMount(() => {
-	// 	loop();
-
-	// 	return () => {
-	// 		clear_loop();
-	// 	};
-	// });
+	});
 </script>
 
 <svelte:head>
@@ -129,30 +124,30 @@
 	/>
 </svelte:head>
 
-{#if state.loaded}
-	<div class={['relative my-32 ']} {@attach reveal}>
-		{#each projects as project, project_i}
-			<a
-				class="grid-8 my-8"
-				href="featured-projects/{project.slug}"
-				aria-label="View project: {project.name} by {project.artist}"
+<div class={['relative my-32 ']}>
+	{#each projects as project, project_i}
+		<a
+			class="grid-8 my-8"
+			href="featured-projects/{project.slug}"
+			aria-label="View project: {project.name} by {project.artist}"
+		>
+			<div
+				class="col-span-4 flex gap-6 sm:col-span-2 sm:max-lg:justify-end lg:col-span-2 lg:ml-1.5"
 			>
-				<div
-					class="col-span-4 flex gap-6 sm:col-span-2 sm:max-lg:justify-end lg:col-span-2 lg:ml-1.5"
-				>
-					<div>
-						<div class="max-lg:text-white/50">{project.name}</div>
-						<div class="sm:max-lg:hidden">by {project.artist}</div>
-						<br />
-						<div class="text-2 max-lg:hidden">{project.date}</div>
-					</div>
+				<div>
+					<div class="max-lg:text-white/50">{project.name}</div>
+					<div class="sm:max-lg:hidden">by {project.artist}</div>
+					<br />
+					<div class="text-2 max-lg:hidden">{project.date}</div>
 				</div>
-				<div class="col-span-3 hidden sm:block lg:hidden">
-					<div>by {project.artist}</div>
-				</div>
-				<div class="col-span-3 text-right lg:hidden">
-					<div class="text-2">{project.date}</div>
-				</div>
+			</div>
+			<div class="col-span-3 hidden sm:block lg:hidden">
+				<div>by {project.artist}</div>
+			</div>
+			<div class="col-span-3 text-right lg:hidden">
+				<div class="text-2">{project.date}</div>
+			</div>
+			{#if state.loaded}
 				<div class="col-span-full grid grid-cols-4 gap-1 max-lg:-mt-6 max-lg:mb-6 lg:col-span-6">
 					<div
 						class="relative col-span-3 col-start-2 aspect-video w-full sm:col-span-1 sm:col-start-1"
@@ -188,11 +183,12 @@
 						{/each}
 					</div>
 				</div>
-			</a>
-		{/each}
-	</div>
-{:else}
-	<Loader />
+			{/if}
+		</a>
+	{/each}
+</div>
+{#if !state.loaded}
+	<Loader {onloaded} />
 {/if}
 <div
 	class={[

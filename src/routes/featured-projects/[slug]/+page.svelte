@@ -2,7 +2,7 @@
 	import { dev } from '$app/environment';
 	import { projects } from '$lib/data.js';
 	import type { Project } from '$lib/types.js';
-	import Video from '../../../lib/video.svelte';
+	import Video from '$lib/video.svelte';
 
 	const { data } = $props();
 
