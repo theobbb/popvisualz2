@@ -19,7 +19,7 @@
 
 <div class="mt-12 mb-24 grid grid-cols-8 gap-x-3 max-md:gap-x-2 md:gap-x-6 md:gap-y-12">
 	<div
-		class="sticky top-12 z-50 h-full w-full max-md:col-span-2 max-md:col-start-7 max-md:row-2 max-md:-mt-4 max-md:hidden"
+		class="sticky top-12 z-10 h-full w-full max-md:col-span-2 max-md:col-start-7 max-md:row-2 max-md:-mt-4 max-md:hidden"
 	>
 		<div class="absolute aspect-square w-full">
 			<Pictogram src="film-headshot-2" />
@@ -42,7 +42,7 @@
 			<Pictogram src="film-headshot-2" />
 		</div>
 	</div>
-	<div class="sticky top-12 z-50 h-full w-full max-md:hidden">
+	<div class="sticky top-12 z-10 h-full w-full max-md:hidden">
 		<Pictogram src="film-headshot-1" />
 	</div>
 

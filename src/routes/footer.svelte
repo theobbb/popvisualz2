@@ -25,7 +25,7 @@
 	<div
 		class="col-span-4 translate-y-0.5 max-md:-mt-4 md:col-span-2 md:col-start-5 xl:col-span-1 xl:col-start-7"
 	>
-		Pop Visualz ©
+		Pop Visualz &copy;
 	</div>
 	<div
 		class="text-2 col-span-4 translate-y-0.5 pr-1.5 text-right max-md:-mt-4 md:col-span-2 xl:col-span-1"

@@ -1,6 +1,7 @@
-<script>
+<script lang="ts">
 	import { onNavigate } from '$app/navigation';
 	import { page } from '$app/state';
+	import ChaosFooter from './chaos-footer.svelte';
 	import PokemonJosh from './pokemon-josh.svelte';
 
 	let pokemon_open = $state(page.route.id == '/');
@@ -21,7 +22,7 @@
 	});
 </script>
 
-<header class="sticky top-0 z-20 pt-1.5 mix-blend-difference" style="line-height: 113%;">
+<header class="sticky top-0 z-40 pt-1.5 mix-blend-difference" style="line-height: 113%;">
 	<nav class="max-lg:hidden">
 		<ul class="grid-8">
 			<div class="text-2 text-right">Directed by</div>
@@ -69,7 +70,7 @@
 
 	<div
 		class={[
-			' absolute z-100 flex w-full justify-between gap-6 text-2xl ',
+			' absolute z-100 flex w-full justify-between gap-6 text-2xl lg:hidden ',
 			!menu_open && 'pointer-events-none opacity-0',
 			menu_open && 'pointer-events-auto',
 			'transition duration-75'
@@ -103,7 +104,7 @@
 </header>
 <div
 	class={[
-		'pointer-events-none fixed inset-0 z-10 bg-black/60 backdrop-blur-lg',
+		'pointer-events-none fixed inset-0 z-20 bg-black/60 backdrop-blur-lg',
 		!menu_open && 'opacity-0',
 		'transition duration-75'
 	]}
@@ -118,3 +119,7 @@
 >
 	<PokemonJosh />
 </div>
+
+{#if page.route.id == '/' || menu_open}
+	<ChaosFooter />
+{/if}
