@@ -30,10 +30,7 @@
 
 		// 1. Collect all asset URLs
 		projects.forEach((project, project_i) => {
-			// Add the project thumbnail image
 			asset_urls.push(`/images/thumbnails/${project.slug}.webp`);
-
-			// Add all 18 videos for the project
 			for (let i = 1; i <= chars[project_i].length; i++) {
 				asset_urls.push(`/videos/snapshots/${project.slug}_${i}.mp4`);
 			}
@@ -52,8 +49,8 @@
 					};
 					img.onerror = () => {
 						console.error('Failed to load image:', url);
-						on_asset_load(); // IMPORTANT: Still count it as "loaded" for the progress bar
-						resolve(); // Also resolve on error
+						on_asset_load();
+						resolve();
 					};
 
 					img.src = url;
@@ -65,25 +62,34 @@
 					};
 					video.onerror = () => {
 						console.error('Failed to load video:', url);
-						on_asset_load(); // IMPORTANT: Still count it
-						resolve(); // Also resolve on error
+						on_asset_load();
+						resolve();
 					};
 					video.src = url;
 				}
 			});
 		};
+		// 3. Load assets using a concurrency pool instead of Promise.all
+		async function load_with_pool(urls: string[], pool_limit: number) {
+			const executing: Promise<void>[] = [];
+			for (const url of urls) {
+				const p = load_asset(url).then(() => {
+					// When a promise resolves, remove it from the executing array
+					executing.splice(executing.indexOf(p), 1);
+				});
+				executing.push(p);
 
-		// 3. Load all assets concurrently
-		Promise.all(asset_urls.map(load_asset))
-			.then(() => {
-				// All assets are loaded, update state and start the animation loop
-				exit();
-			})
-			.catch((error) => {
-				console.error('Failed to load assets:', error);
-				// Handle error, maybe show a message
-				exit();
-			});
+				// If the pool is full, wait for one of the promises to finish
+				if (executing.length >= pool_limit) {
+					await Promise.race(executing);
+				}
+			}
+			// Wait for all remaining promises to complete
+			await Promise.all(executing);
+		}
+		load_with_pool(asset_urls, 8).then(() => {
+			exit();
+		});
 
 		return exit;
 	});
