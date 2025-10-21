@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { dev } from '$app/environment';
 	import { projects } from '$lib/data.js';
-	import IconYoutube from '$lib/icons/icon-youtube.svelte';
 	import type { Project } from '$lib/types.js';
 	import Video from '../../../lib/video.svelte';
 
