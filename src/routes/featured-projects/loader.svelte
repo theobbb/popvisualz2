@@ -69,23 +69,24 @@
 				}
 			});
 		};
-		// 3. Load assets using a concurrency pool instead of Promise.all
 		async function load_with_pool(urls: string[], pool_limit: number) {
-			const executing: Promise<void>[] = [];
-			for (const url of urls) {
-				const p = load_asset(url).then(() => {
-					// When a promise resolves, remove it from the executing array
-					executing.splice(executing.indexOf(p), 1);
-				});
-				executing.push(p);
+			const queue = [...urls];
 
-				// If the pool is full, wait for one of the promises to finish
-				if (executing.length >= pool_limit) {
-					await Promise.race(executing);
-				}
-			}
-			// Wait for all remaining promises to complete
-			await Promise.all(executing);
+			const run_task = async () => {
+				if (queue.length === 0) return; // Worker is done
+
+				const url = queue.shift()!; // Get the next URL
+				await load_asset(url); // Wait for it to load (or time out)
+				await run_task(); // Process the next item in the queue
+			};
+
+			// Create and start a number of workers
+			const workers = Array(pool_limit)
+				.fill(null)
+				.map(() => run_task());
+
+			// Wait for all worker chains to complete
+			await Promise.all(workers);
 		}
 		load_with_pool(asset_urls, 8).then(() => {
 			exit();
