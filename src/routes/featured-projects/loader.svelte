@@ -52,19 +52,42 @@
 						on_asset_load();
 						resolve();
 					};
-
 					img.src = url;
 				} else if (url.endsWith('.mp4')) {
 					const video = document.createElement('video');
+					let timeoutId: number;
+
+					// This cleanup function is important to prevent
+					// late events from firing after we've already moved on.
+					const cleanup = () => {
+						clearTimeout(timeoutId);
+						video.oncanplaythrough = null;
+						video.onerror = null;
+					};
+
 					video.oncanplaythrough = () => {
+						cleanup();
 						on_asset_load();
 						resolve();
 					};
+
 					video.onerror = () => {
+						cleanup();
 						console.error('Failed to load video:', url);
 						on_asset_load();
 						resolve();
 					};
+
+					// Start a 5-second timer.
+					timeoutId = setTimeout(() => {
+						cleanup();
+						console.warn(`Video timed out (5s): ${url}. Skipping.`);
+						// We MUST call on_asset_load() to advance the progress bar.
+						on_asset_load();
+						// And we MUST resolve() to unblock the worker.
+						resolve();
+					}, 5000); // 5 seconds
+
 					video.src = url;
 				}
 			});
