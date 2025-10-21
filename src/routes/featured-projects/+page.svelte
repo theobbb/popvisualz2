@@ -4,7 +4,7 @@
 	import Video from './video.svelte';
 	import type { Attachment } from 'svelte/attachments';
 	import Loader from './loader.svelte';
-	import { state } from './state.svelte';
+	import { ctx } from './ctx.svelte';
 
 	const dev_pause_loop = false;
 	let video_map = new Map<string, HTMLVideoElement>();
@@ -101,14 +101,14 @@
 	};
 
 	function onloaded() {
-		state.loaded = true;
+		ctx.loaded = true;
 
 		if (timeout_loop) return;
 		loop();
 	}
 
 	onMount(() => {
-		if (state.loaded) loop();
+		if (ctx.loaded) loop();
 
 		return () => {
 			clear_loop();
@@ -147,7 +147,7 @@
 			<div class="col-span-3 text-right lg:hidden">
 				<div class="text-2">{project.date}</div>
 			</div>
-			{#if state.loaded}
+			{#if ctx.loaded}
 				<div class="col-span-full grid grid-cols-4 gap-1 max-lg:-mt-6 max-lg:mb-6 lg:col-span-6">
 					<div
 						class="relative col-span-3 col-start-2 aspect-video w-full sm:col-span-1 sm:col-start-1"
@@ -187,13 +187,13 @@
 		</a>
 	{/each}
 </div>
-{#if !state.loaded}
+{#if !ctx.loaded}
 	<Loader {onloaded} />
 {/if}
 <div
 	class={[
 		' fixed inset-0 z-10 bg-black',
-		state.loaded ? 'pointer-events-none opacity-0' : 'cursor-wait',
+		ctx.loaded ? 'pointer-events-none opacity-0' : 'cursor-wait',
 		'transition duration-400 ease-in'
 	]}
 ></div>
