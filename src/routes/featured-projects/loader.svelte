@@ -43,22 +43,31 @@
 
 		// 2. Create a loading promise for a single asset
 		const load_asset = (url: string) => {
-			return new Promise<void>((resolve, reject) => {
+			return new Promise<void>((resolve) => {
 				if (url.endsWith('.webp')) {
 					const img = new Image();
 					img.onload = () => {
 						on_asset_load();
 						resolve();
 					};
-					img.onerror = reject;
+					img.onerror = () => {
+						console.error('Failed to load image:', url);
+						on_asset_load(); // IMPORTANT: Still count it as "loaded" for the progress bar
+						resolve(); // Also resolve on error
+					};
+
 					img.src = url;
 				} else if (url.endsWith('.mp4')) {
 					const video = document.createElement('video');
-					video.oncanplaythrough = () => {
+					video.onloadeddata = () => {
 						on_asset_load();
 						resolve();
 					};
-					video.onerror = reject;
+					video.onerror = () => {
+						console.error('Failed to load video:', url);
+						on_asset_load(); // IMPORTANT: Still count it
+						resolve(); // Also resolve on error
+					};
 					video.src = url;
 				}
 			});
