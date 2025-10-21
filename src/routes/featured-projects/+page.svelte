@@ -3,8 +3,12 @@
 	import { onMount } from 'svelte';
 	import Video from './video.svelte';
 	import type { Attachment } from 'svelte/attachments';
+	import Loader from './loader.svelte';
+	import { state } from './state.svelte';
 
 	const dev_pause_loop = false;
+	let video_map = new Map<string, HTMLVideoElement>();
+	let user_interacted: boolean = false;
 
 	const chars = [
 		'FAN______SERVICE__',
@@ -14,10 +18,6 @@
 		`UNDER THERUG______`,
 		`CHASE LESSTARS___ `
 	];
-
-	let video_map = new Map<string, HTMLVideoElement>();
-
-	let user_interacted: boolean = false;
 
 	function onmouseenter(ev: MouseEvent) {
 		const video = ev.currentTarget;
@@ -46,7 +46,7 @@
 		video.style.opacity = '1';
 	}
 
-	const delay = 1000;
+	const delay = 2000;
 
 	let cursor: number = 0;
 
@@ -87,14 +87,6 @@
 		timeout_loop = null;
 	}
 
-	onMount(() => {
-		loop();
-
-		return () => {
-			clear_loop();
-		};
-	});
-
 	const video_handler: Attachment = (video) => {
 		if (!(video instanceof HTMLVideoElement)) return;
 
@@ -108,6 +100,25 @@
 			video.removeEventListener('ended', onended);
 		};
 	};
+
+	const reveal: Attachment = (el) => {
+		if (!el) return;
+		if (!(el instanceof HTMLDivElement)) return;
+
+		loop();
+
+		return () => {
+			clear_loop();
+		};
+	};
+
+	// onMount(() => {
+	// 	loop();
+
+	// 	return () => {
+	// 		clear_loop();
+	// 	};
+	// });
 </script>
 
 <svelte:head>
@@ -118,64 +129,75 @@
 	/>
 </svelte:head>
 
-<div class="relative my-32">
-	{#each projects as project, project_i}
-		<a
-			class="grid-8 my-8"
-			href="featured-projects/{project.slug}"
-			aria-label="View project: {project.name} by {project.artist}"
-		>
-			<div
-				class="col-span-4 flex gap-6 sm:col-span-2 sm:max-lg:justify-end lg:col-span-2 lg:ml-1.5"
+{#if state.loaded}
+	<div class={['relative my-32 ']} {@attach reveal}>
+		{#each projects as project, project_i}
+			<a
+				class="grid-8 my-8"
+				href="featured-projects/{project.slug}"
+				aria-label="View project: {project.name} by {project.artist}"
 			>
-				<div>
-					<div class="max-lg:text-white/50">{project.name}</div>
-					<div class="sm:max-lg:hidden">by {project.artist}</div>
-					<br />
-					<div class="text-2 max-lg:hidden">{project.date}</div>
-				</div>
-			</div>
-			<div class="col-span-3 hidden sm:block lg:hidden">
-				<div>by {project.artist}</div>
-			</div>
-			<div class="col-span-3 text-right lg:hidden">
-				<div class="text-2">{project.date}</div>
-			</div>
-			<div class="col-span-full grid grid-cols-4 gap-1 max-lg:-mt-6 max-lg:mb-6 lg:col-span-6">
 				<div
-					class="relative col-span-3 col-start-2 aspect-video w-full sm:col-span-1 sm:col-start-1"
+					class="col-span-4 flex gap-6 sm:col-span-2 sm:max-lg:justify-end lg:col-span-2 lg:ml-1.5"
 				>
-					<img
-						class="peer absolute h-full w-full object-cover"
-						alt="{project.name} by {project.artist}"
-						src="/images/thumbnails/{project.slug}.webp"
-					/>
+					<div>
+						<div class="max-lg:text-white/50">{project.name}</div>
+						<div class="sm:max-lg:hidden">by {project.artist}</div>
+						<br />
+						<div class="text-2 max-lg:hidden">{project.date}</div>
+					</div>
+				</div>
+				<div class="col-span-3 hidden sm:block lg:hidden">
+					<div>by {project.artist}</div>
+				</div>
+				<div class="col-span-3 text-right lg:hidden">
+					<div class="text-2">{project.date}</div>
+				</div>
+				<div class="col-span-full grid grid-cols-4 gap-1 max-lg:-mt-6 max-lg:mb-6 lg:col-span-6">
+					<div
+						class="relative col-span-3 col-start-2 aspect-video w-full sm:col-span-1 sm:col-start-1"
+					>
+						<img
+							class="peer absolute h-full w-full object-cover"
+							alt="{project.name} by {project.artist}"
+							src="/images/thumbnails/{project.slug}.webp"
+						/>
+
+						<div
+							class={[
+								'pointer-events-none absolute top-0 left-0 size-2.5 -translate-x-6 translate-y-1 rounded-full bg-white max-lg:hidden ',
+								'opacity-0 peer-hover:opacity-100',
+								'transition duration-100'
+							]}
+						></div>
+					</div>
 
 					<div
-						class={[
-							'pointer-events-none absolute top-0 left-0 size-2.5 -translate-x-6 translate-y-1 rounded-full bg-white max-lg:hidden ',
-							'opacity-0 peer-hover:opacity-100',
-							'transition duration-100'
-						]}
-					></div>
-				</div>
+						class="col-span-full grid grid-cols-9 gap-1 text-5xl font-light sm:col-span-3 lg:text-7xl"
+					>
+						{#each chars[project_i].split('') as char, char_i}
+							<div class="relative flex items-center justify-center">
+								{#if char == '_'}
+									<span class="pointer-events-none opacity-0" aria-hidden={true}>*</span>
+								{:else}
+									<span class="text-white/80">{char}</span>
+								{/if}
 
-				<div
-					class="col-span-full grid grid-cols-9 gap-1 text-5xl font-light sm:col-span-3 lg:text-7xl"
-				>
-					{#each chars[project_i].split('') as char, char_i}
-						<div class="relative flex items-center justify-center">
-							{#if char == '_'}
-								<span class="pointer-events-none opacity-0" aria-hidden={true}>*</span>
-							{:else}
-								<span class="text-white/80">{char}</span>
-							{/if}
-
-							<Video src="{project.slug}_{char_i + 1}" {@attach video_handler} />
-						</div>
-					{/each}
+								<Video src="{project.slug}_{char_i + 1}" {@attach video_handler} />
+							</div>
+						{/each}
+					</div>
 				</div>
-			</div>
-		</a>
-	{/each}
-</div>
+			</a>
+		{/each}
+	</div>
+{:else}
+	<Loader />
+{/if}
+<div
+	class={[
+		' fixed inset-0 z-10 bg-black',
+		state.loaded ? 'pointer-events-none opacity-0' : 'cursor-wait',
+		'transition duration-400 ease-in'
+	]}
+></div>

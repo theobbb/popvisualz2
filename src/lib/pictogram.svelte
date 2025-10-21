@@ -30,10 +30,12 @@
 <div class="pointer-events-auto absolute aspect-square w-full">
 	<img
 		{ontouchstart}
-		alt="pixel-picto"
+		alt=""
+		role="presentation"
 		class="peer absolute inset-0 h-full w-full grayscale"
 		style=" image-rendering: pixelated;"
 		src="/pictograms/{src}-pixel.webp"
+		loading="eager"
 	/>
 	<img
 		alt="picto"
@@ -42,5 +44,6 @@
 			touched && 'opacity-100!'
 		]}
 		src="/pictograms/{src}.webp"
+		loading="lazy"
 	/>
 </div>
