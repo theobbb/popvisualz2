@@ -18,7 +18,7 @@
 	</div>
 
 	<div class="relative">
-		<img class="shadow-lg shadow-white/10" src="/images/headshot.webp" alt="headshot" />
+		<img class="" src="/images/headshot.webp" alt="headshot" />
 		<div class="absolute top-1.5 right-1.5 text-2xl"><IconInfo /></div>
 	</div>
 
