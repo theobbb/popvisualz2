@@ -31,9 +31,9 @@
 		// 1. Collect all asset URLs
 		projects.forEach((project, project_i) => {
 			asset_urls.push(`/images/thumbnails/${project.slug}.webp`);
-			for (let i = 1; i <= chars[project_i].length; i++) {
-				asset_urls.push(`/videos/snapshots/${project.slug}_${i}.mp4`);
-			}
+			// for (let i = 1; i <= chars[project_i].length; i++) {
+			// 	asset_urls.push(`/videos/snapshots/${project.slug}_${i}.mp4`);
+			// }
 		});
 
 		total_assets = asset_urls.length;
