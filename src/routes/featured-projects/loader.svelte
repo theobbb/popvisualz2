@@ -24,6 +24,7 @@
 	}
 
 	onMount(() => {
+		return;
 		document.body.style.overflow = 'hidden';
 
 		const asset_urls: string[] = [];
