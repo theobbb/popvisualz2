@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { projects } from '$lib/data';
 	import { onMount } from 'svelte';
-	import { chars } from './data';
 	import { ctx } from './ctx.svelte';
+	import JSZip from 'jszip';
 
 	const { onloaded } = $props();
 
@@ -10,7 +9,7 @@
 	let loader_progress = $state(0);
 
 	let loaded_assets = 0;
-	let total_assets = 0;
+	const total_assets = 18 * 6;
 
 	function on_asset_load() {
 		loaded_assets++;
@@ -23,65 +22,28 @@
 		console.log('end');
 	}
 
-	onMount(() => {
-		return;
-		document.body.style.overflow = 'hidden';
+	async function load() {
+		const res = await fetch(`/videos/archive.zip`);
+		const zip_blob = await res.arrayBuffer();
+		const zip = await JSZip.loadAsync(zip_blob);
 
-		const asset_urls: string[] = [];
-
-		// 1. Collect all asset URLs
-		projects.forEach((project, project_i) => {
-			asset_urls.push(`/images/thumbnails/${project.slug}.webp`);
-			// for (let i = 1; i <= chars[project_i].length; i++) {
-			// 	asset_urls.push(`/videos/snapshots/${project.slug}_${i}.mp4`);
-			// }
-		});
-
-		total_assets = asset_urls.length;
-
-		const load_asset = (url: string) => {
-			return new Promise<void>((resolve) => {
-				if (url.endsWith('.webp')) {
-					const img = new Image();
-					img.onload = img.onerror = () => {
-						on_asset_load();
-						resolve();
-					};
-					img.src = url;
-				} else if (url.endsWith('.mp4')) {
-					// ✅ Faster: just fetch the video file without decoding it
-					fetch(url, { method: 'GET', cache: 'force-cache' })
-						.then(() => on_asset_load())
-						.catch(() => {
-							console.warn('Failed to fetch video:', url);
-							on_asset_load();
-						})
-						.finally(resolve);
-				}
+		const file_promises = Object.values(zip.files)
+			.filter((zipEntry) => !zipEntry.dir)
+			.map(async (zipEntry) => {
+				const blob = await zipEntry.async('blob');
+				on_asset_load();
+				const blob_url = URL.createObjectURL(blob);
+				return [zipEntry.name.replace('.mp4', ''), blob_url];
 			});
-		};
-		async function load_with_pool(urls: string[], pool_limit: number) {
-			const queue = [...urls];
+		const url_pairs = await Promise.all(file_promises);
+		ctx.blob_urls = new Map(url_pairs);
 
-			const run_task = async () => {
-				if (queue.length === 0) return; // Worker is done
+		exit();
+	}
 
-				const url = queue.shift()!; // Get the next URL
-				await load_asset(url); // Wait for it to load (or time out)
-				await run_task(); // Process the next item in the queue
-			};
-
-			// Create and start a number of workers
-			const workers = Array(pool_limit)
-				.fill(null)
-				.map(() => run_task());
-
-			// Wait for all worker chains to complete
-			await Promise.all(workers);
-		}
-		load_with_pool(asset_urls, 8).then(() => {
-			exit();
-		});
+	onMount(() => {
+		document.body.style.overflow = 'hidden';
+		load();
 
 		return exit;
 	});

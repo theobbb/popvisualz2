@@ -101,26 +101,6 @@
 		};
 	};
 
-	let blob_urls = $state(new Map<string, string>());
-
-	async function extract() {
-		const res = await fetch(`/videos/archive.zip`);
-		const zip_blob = await res.arrayBuffer();
-		const zip = await JSZip.loadAsync(zip_blob);
-
-		const file_promises = Object.values(zip.files)
-			.filter((zipEntry) => !zipEntry.dir)
-			.map(async (zipEntry) => {
-				const blob = await zipEntry.async('blob');
-				const blob_url = URL.createObjectURL(blob);
-				return [zipEntry.name.replace('.mp4', ''), blob_url];
-			});
-		const url_pairs = await Promise.all(file_promises);
-		blob_urls = new Map(url_pairs);
-
-		ctx.loaded = true;
-	}
-
 	function onloaded() {
 		ctx.loaded = true;
 
@@ -129,18 +109,11 @@
 	}
 
 	onMount(() => {
-		extract();
 		if (ctx.loaded) loop();
 
 		return () => {
 			document.body.style.overflow = '';
 			clear_loop();
-
-			for (const urls of blob_urls.values()) {
-				for (const url of urls) {
-					URL.revokeObjectURL(url);
-				}
-			}
 		};
 	});
 </script>
@@ -208,7 +181,7 @@
 								{/if}
 
 								<Video
-									src={blob_urls.get(`${project.slug}_${char_i + 1}`)}
+									src={ctx.blob_urls.get(`${project.slug}_${char_i + 1}`)}
 									i={char_i}
 									slug={project.slug}
 									{@attach video_handler}
