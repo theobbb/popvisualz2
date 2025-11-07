@@ -71,6 +71,5 @@ export const partners = [
 	'Converse',
 	'Montreality',
 	'LeWarmupFM',
-	'OneTrackMind',
-	'Essentrix'
+	'OneTrackMind'
 ];

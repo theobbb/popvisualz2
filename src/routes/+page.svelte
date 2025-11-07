@@ -1,14 +1,6 @@
 <script lang="ts">
-	import { partners } from '$lib/data';
-	import IconArrow from '$lib/icons/icon-arrow.svelte';
-	import IconMtl from '$lib/icons/icon-mtl.svelte';
-	import Pictogram from '$lib/pictogram.svelte';
-	import ChaosFooter from './chaos-footer.svelte';
 	import Reel from './reel.svelte';
-
-	const cx = {
-		picto: 'absolute top-0 left-0 size-[26vw] md:size-50'
-	};
+	import TrustedBy from './trusted-by.svelte';
 </script>
 
 <svelte:head>
@@ -29,3 +21,5 @@
 		class="rotate-12- absolute bottom-0 left-0 h-96 w-full bg-gradient-to-b from-transparent to-black/90"
 	></div>
 </div>
+
+<TrustedBy />

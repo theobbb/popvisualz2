@@ -19,7 +19,6 @@
 	function exit() {
 		document.body.style.overflow = '';
 		onloaded();
-		console.log('end');
 	}
 
 	async function load() {

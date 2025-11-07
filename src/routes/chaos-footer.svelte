@@ -87,7 +87,7 @@
 		<div class="pointer-events-none relative z-50 max-sm:text-[3vw]/[3.4vw]">
 			<div class="relative -translate-y-1">
 				<div class="text-balance">
-					<div class="text-2 inline-block">Companies I've worked with:</div>
+					<div class="text-2 inline-block">Trusted by:</div>
 					{#each partners as partner, i}
 						<span class="inline-block">{partner}</span>
 						<span class={['inline-block select-none', i == partners.length - 1 && '!hidden']}
