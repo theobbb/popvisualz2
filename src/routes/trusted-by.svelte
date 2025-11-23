@@ -46,14 +46,15 @@
 	});
 </script>
 
-<div class="fixed right-4 bottom-10 max-[1330px]:hidden [@media(max-height:815px)]:hidden">
-	<div class="mb-2 flex w-52 justify-between gap-2 pl-5">
+<div class="fixed right-4 bottom-2 max-[1330px]:hidden [@media(max-height:650px)]:hidden">
+	<!-- <div class="mb-2 flex w-52 justify-between gap-2 pl-5">
 		<button class="cursor-pointer" onclick={manual_next}>Next (→)</button>
-	</div>
+	</div> -->
 
-	<div class="relative size-52">
+	<button class="relative size-36 cursor-pointer" onclick={manual_next}>
 		{#each list as [src, name], i}
 			<img
+				alt="trusted-by-{name}"
 				title={name}
 				class={[
 					'border- absolute top-0 left-0 aspect-square h-full w-full border-white/20 object-contain p-1',
@@ -63,7 +64,7 @@
 				src="/images/trusted-by/{src}.webp"
 			/>
 		{/each}
-	</div>
+	</button>
 </div>
 
 <!-- <div class="fixed right-4 bottom-20">
