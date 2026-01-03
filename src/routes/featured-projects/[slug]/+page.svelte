@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { dev } from '$app/environment';
-	import { projects } from '$lib/data.js';
-	import type { Project } from '$lib/types.js';
+
 	import Video from '$lib/video.svelte';
+	import { projects, type Project } from '../data.js';
 
 	const { data } = $props();
 
 	const project = $derived(data.project);
 
-	const index = $derived(projects.findIndex((p: Project) => p.slug == project.slug));
+	const index = $derived(projects.findIndex((p) => p.slug == project.slug));
 	const previous: Project | null = $derived(projects[index - 1]);
 	const next: Project | null = $derived(projects[index + 1]);
 

@@ -6,7 +6,7 @@
 	import IconYoutube from '$lib/icons/icon-youtube.svelte';
 </script>
 
-<div class="grid-8 pb-1">
+<div class="grid-8 pb-2.5 lg:pb-1">
 	<a href={social_links[0][2]} target="_blank" class="col-span-2 md:col-span-1">
 		<IconInstagram />
 	</a>

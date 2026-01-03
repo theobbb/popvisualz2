@@ -1,24 +1,14 @@
 <script lang="ts">
-	import { projects } from '$lib/data';
 	import { onMount } from 'svelte';
 	import Video from './video.svelte';
 	import type { Attachment } from 'svelte/attachments';
 	import Loader from './loader.svelte';
 	import { ctx } from './ctx.svelte';
-	import JSZip from 'jszip';
+	import { char_map, chars, projects } from './data';
 
 	const dev_pause_loop = false;
 	let video_map = new Map<string, HTMLVideoElement>();
 	let user_interacted: boolean = false;
-
-	const chars = [
-		'FAN______SERVICE__',
-		`BURNIN’___________`,
-		`HOLDING__ME_DOWN__`,
-		`CHROME____________`,
-		`UNDER THERUG______`,
-		`CHASE LESSTARS___ `
-	];
 
 	function onmouseenter(ev: MouseEvent) {
 		const video = ev.currentTarget;
@@ -49,19 +39,6 @@
 	const delay = 2000;
 
 	let cursor: number = 0;
-
-	const char_map = [
-		[5, 12, 8, 3, 16, 7],
-		[9, 2, 14, 6, 11, 4],
-		[17, 5, 10, 13, 8, 1],
-		[3, 15, 9, 12, 7, 18],
-		[14, 6, 2, 11, 4, 16],
-		[10, 8, 17, 5, 13, 9],
-		[7, 3, 15, 1, 12, 14],
-		[16, 11, 4, 9, 18, 2],
-		[8, 13, 6, 10, 5, 17],
-		[12, 7, 9, 3, 15, 11]
-	];
 
 	let timeout_loop: ReturnType<typeof setTimeout> | null = null;
 	function loop() {
