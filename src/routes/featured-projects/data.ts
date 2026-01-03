@@ -1,3 +1,5 @@
+export const ARCHIVE_PATH = '/videos/archive-3.zip';
+
 export const chars = [
 	'CINNAMON__________',
 	'HERE_I_GO_AGAIN___',

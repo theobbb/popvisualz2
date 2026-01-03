@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { ctx } from './ctx.svelte';
 	import JSZip from 'jszip';
+	import { ARCHIVE_PATH } from './data';
 
 	const { onloaded } = $props();
 
@@ -22,7 +23,7 @@
 	}
 
 	async function load() {
-		const res = await fetch(`/videos/archive-2.zip`);
+		const res = await fetch(ARCHIVE_PATH);
 		const zip_blob = await res.arrayBuffer();
 		const zip = await JSZip.loadAsync(zip_blob);
 
