@@ -22,7 +22,7 @@
 	}
 
 	async function load() {
-		const res = await fetch(`/videos/archive.zip`);
+		const res = await fetch(`/videos/archive-2.zip`);
 		const zip_blob = await res.arrayBuffer();
 		const zip = await JSZip.loadAsync(zip_blob);
 
