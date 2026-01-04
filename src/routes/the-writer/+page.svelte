@@ -32,17 +32,17 @@
 	};
 </script>
 
-<div
-	class={[
-		'pointer-events-none fixed right-1.5 bottom-1.5 left-1.5 z-100',
-		bottom ? '' : 'opacity-0',
-		'transition duration-100'
-	]}
->
+<div class="pointer-events-none fixed right-1.5 bottom-1.5 left-1.5 z-100" ,>
 	<div class="grid-8">
 		<div class="col-start-8 text-right">
 			<div class="flex items-end justify-end">
-				<div class="pointer-events-auto relative flex items-end justify-end text-right">
+				<div
+					class={[
+						'relative flex items-end justify-end text-right',
+						bottom ? 'pointer-events-auto' : 'opacity-0',
+						'transition duration-100'
+					]}
+				>
 					<a class="peer block" href="https://www.youtube.com/watch?v=MHweharI3mA" target="_blank"
 						>Watch on<br /> Youtube(+)</a
 					>
