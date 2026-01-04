@@ -9,8 +9,6 @@
 
 	let bottom = $state(false);
 
-	$inspect(bottom);
-
 	function handle_intersect(entry: IntersectionObserverEntry) {
 		if (entry.isIntersecting) {
 			bottom = false;
