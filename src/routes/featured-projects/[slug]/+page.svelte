@@ -111,8 +111,19 @@
 			</div>
 		</div>
 
-		<div class="flex items-end justify-end text-right">
-			<a href={project.youtube_url} target="_blank">Watch on<br /> Youtube(+)</a>
+		<div class="flex items-end justify-end">
+			<div class="relative flex items-end justify-end text-right">
+				<a class="peer block" href={project.youtube_url} target="_blank"
+					>Watch on<br /> Youtube(+)</a
+				>
+				<div
+					class={[
+						'pointer-events-none absolute top-0 right-0 size-2.5 -translate-x-21 translate-y-1 rounded-full bg-white max-md:hidden ',
+						'opacity-0 peer-hover:opacity-100',
+						'transition duration-100'
+					]}
+				></div>
+			</div>
 		</div>
 	</div>
 </div>

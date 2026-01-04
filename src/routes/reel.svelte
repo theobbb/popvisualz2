@@ -3,9 +3,13 @@
 	import Hls from 'hls.js';
 	import { dev } from '$app/environment';
 
-	const autoplay = !dev;
+	const autoplay = true;
 
-	const src = 'https://stream.mux.com/yBbPMzMQNcsoGafylO01lGeXOOGwQB7CEpvRCVaaXCVY.m3u8';
+	const PLAYBACK_ID = '5z9smjaw3O1rCTpmDqm8XzeqnPfdafNh02cCukS6nQnM';
+
+	//yBbPMzMQNcsoGafylO01lGeXOOGwQB7CEpvRCVaaXCVY
+
+	const src = `https://stream.mux.com/${PLAYBACK_ID}.m3u8`;
 
 	let hls: Hls | null = null;
 
@@ -57,7 +61,7 @@
 		class={[
 			'absolute top-0 left-0 h-full w-full object-cover opacity-0',
 			mounted && 'opacity-100',
-			'transition duration-500 ease-in'
+			'transition duration-100 ease-in'
 		]}
 	>
 	</video>

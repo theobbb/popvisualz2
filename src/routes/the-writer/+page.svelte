@@ -1,12 +1,65 @@
-<script>
+<script lang="ts">
 	import IconArrowCorner from '$lib/icons/icon-arrow-corner.svelte';
 	import Pictogram from '$lib/pictogram.svelte';
+	import { useIntersectionObserver } from '$lib/utils/intersection-observer';
 	import Video from '$lib/video.svelte';
+	import { onMount } from 'svelte';
+
+	let sentinel: HTMLHeadElement;
+
+	let bottom = $state(false);
+
+	$inspect(bottom);
+
+	function handle_intersect(entry: IntersectionObserverEntry) {
+		if (entry.isIntersecting) {
+			bottom = false;
+		} else {
+			bottom = true;
+		}
+	}
+
+	onMount(() => {
+		const cleanup = useIntersectionObserver(sentinel, handle_intersect, {
+			root: null, // The viewport
+			rootMargin: '0px 0px 0px 0px', // We can keep this simple since we use the 1px sentinel
+			threshold: 0
+		});
+
+		return cleanup;
+	});
 
 	const cx = {
 		caption: 'mt-2 max-md:ml-3'
 	};
 </script>
+
+<div
+	class={[
+		'pointer-events-none fixed right-1.5 bottom-1.5 left-1.5 z-100',
+		bottom ? '' : 'opacity-0',
+		'transition duration-100'
+	]}
+>
+	<div class="grid-8">
+		<div class="col-start-8 text-right">
+			<div class="flex items-end justify-end">
+				<div class="pointer-events-auto relative flex items-end justify-end text-right">
+					<a class="peer block" href="https://www.youtube.com/watch?v=MHweharI3mA" target="_blank"
+						>Watch on<br /> Youtube(+)</a
+					>
+					<div
+						class={[
+							'pointer-events-none absolute top-0 right-0 size-2.5 -translate-x-21 translate-y-1 rounded-full bg-white max-md:hidden ',
+							'opacity-0 peer-hover:opacity-100',
+							'transition duration-100'
+						]}
+					></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 <div class="mt-12 grid grid-cols-8 gap-2 md:gap-6">
 	<div class="relative col-span-full aspect-video md:col-span-4 md:col-start-3">
@@ -96,3 +149,4 @@
 		<div class={cx.caption}>(poster 2)</div>
 	</div>
 </div>
+<div bind:this={sentinel}></div>
