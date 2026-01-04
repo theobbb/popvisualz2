@@ -32,7 +32,7 @@
 	};
 </script>
 
-<div class="pointer-events-none fixed right-1.5 bottom-1.5 left-1.5 z-100" ,>
+<div class="pointer-events-none fixed right-1.5 bottom-1.5 left-1.5 z-100 mix-blend-difference" ,>
 	<div class="grid-8">
 		<div class="col-start-8 text-right">
 			<div class="flex items-end justify-end">
