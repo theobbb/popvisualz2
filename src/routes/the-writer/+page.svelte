@@ -32,7 +32,7 @@
 	};
 </script>
 
-<div class="pointer-events-none fixed right-1.5 bottom-1.5 left-1.5 z-100 mix-blend-difference" ,>
+<!-- <div class="pointer-events-none fixed right-1.5 bottom-1.5 left-1.5 z-100 mix-blend-difference" ,>
 	<div class="grid-8">
 		<div class="col-start-8 text-right">
 			<div class="flex items-end justify-end">
@@ -57,7 +57,7 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> -->
 
 <div class="mt-12 grid grid-cols-8 gap-2 md:gap-6">
 	<div class="relative col-span-full aspect-video md:col-span-4 md:col-start-3">
@@ -120,6 +120,15 @@
 			introduces his unique vision to audiences worldwide. Frank Apache, owner of the Cabane à Sang
 			Film Festival, praised the work, stating: “This film is not TOY.”
 		</div>
+	</div>
+	<div class="col-span-10 max-md:mb-12 md:col-start-2">
+		<a
+			href="https://www.youtube.com/watch?v=MHweharI3mA"
+			target="_blank"
+			class="flex w-fit items-center gap-1.5 bg-white/70 px-1.5 py-0.5 pr-0.5 text-black transition duration-100 hover:bg-white max-lg:px-2.5 max-lg:py-1 max-lg:pr-1"
+			>Watch the film on youtube
+			<div class="scale-y-[-100%] text-lg"><IconArrowCorner /></div>
+		</a>
 	</div>
 	<div class="col-span-full sm:col-span-4 md:col-span-3 md:col-start-2">
 		<div class="relative aspect-video w-full">

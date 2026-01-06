@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-	<title>PopVisualz - Videographer</title>
+	<title>PopVisualz - Director</title>
 	<meta
 		name="description"
 		content="I'm Josh Pop (PopVisualz), a Montréal-based video director, filmmaker, editor. I handle the entire visual process—from shooting and directing to the final edit. Check out the latest work."
