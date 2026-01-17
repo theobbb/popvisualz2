@@ -4,6 +4,7 @@
 	import Header from './header.svelte';
 	import { page } from '$app/state';
 	import Footer from './footer.svelte';
+	import Analytics from '$lib/analytics.svelte';
 
 	let { children } = $props();
 </script>
@@ -19,3 +20,5 @@
 		<Footer />
 	{/if}
 </div>
+
+<Analytics />
