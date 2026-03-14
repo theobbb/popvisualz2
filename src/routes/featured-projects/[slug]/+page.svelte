@@ -98,12 +98,10 @@
 				></div>
 			</div>
 		</div>
-		<div
-			class="grid-8 md:aspect-auto!- relative h-full w-full"
-			style="aspect-ratio: {project.aspect_ratio}; max-height: calc(100svh - 12rem)"
-		>
+		<div class="relative min-h-0 w-full self-center overflow-hidden">
 			<div
-				class="absolute col-span-full flex h-full w-full items-center justify-center xl:col-span-6 xl:col-start-2"
+				style="aspect-ratio: {project.aspect_ratio}; max-height: calc(100svh - 12rem);"
+				class="mx-auto w-full"
 			>
 				{#key project.slug}
 					<Video autoplay={!dev} playback_id={project.video_playback_id} />

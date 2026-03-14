@@ -6,7 +6,7 @@
 
 	let pokemon_open = $state(page.route.id == '/');
 
-	let menu_open = $state(false);
+	let menu_open = $state(true);
 
 	const links = [
 		['Home (Reel)', '/'],
@@ -79,7 +79,7 @@
 		<div class="">
 			<div class="w-fit opacity-0">*</div>
 			<div class="w-fit opacity-0">*</div>
-			<div>
+			<div class="origin-top-left scale-80">
 				<PokemonJosh />
 			</div>
 		</div>
@@ -106,7 +106,7 @@
 	class={[
 		'pointer-events-none fixed inset-0 z-20 bg-black/60 backdrop-blur-lg',
 		!menu_open && 'opacity-0',
-		'transition duration-75'
+		'transition duration-75 lg:hidden'
 	]}
 ></div>
 <div
@@ -121,5 +121,15 @@
 </div>
 
 {#if page.route.id == '/' || menu_open}
-	<ChaosFooter />
+	<div class={['chaos-footer-mobile container']}><ChaosFooter /></div>
 {/if}
+
+<style>
+	@media (max-height: 800px) {
+		.chaos-footer {
+			/* Scale becomes a function of the viewport height */
+
+			transform: scale(0.5);
+		}
+	}
+</style>

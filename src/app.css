@@ -96,3 +96,18 @@ html,
 .text-2 {
 	color: rgb(109, 109, 109);
 }
+
+/* @media (max-height: 800px) and (min-width: 800px) {
+	.chaos-footer-mobile > div {
+		
+		transform-origin: left bottom;
+		transform: scale(0.7);
+	}
+} */
+/* @media (max-height: 800px) and (max-width: 500px) {
+	.chaos-footer-mobile > div {
+
+		transform-origin: left bottom;
+		transform: scale(0.8);
+	}
+} */

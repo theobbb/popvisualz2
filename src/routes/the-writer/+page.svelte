@@ -125,7 +125,7 @@
 		<a
 			href="https://www.youtube.com/watch?v=MHweharI3mA"
 			target="_blank"
-			class="flex w-fit items-center gap-1.5 bg-white/70 px-1.5 py-0.5 pr-0.5 text-black transition duration-100 hover:bg-white max-lg:px-2.5 max-lg:py-1 max-lg:pr-1"
+			class="flex w-fit items-center gap-1.5 bg-white/70 px-2 py-0.5 pr-1 text-black transition duration-100 hover:bg-white max-lg:px-2.5 max-lg:py-1 max-lg:pr-1"
 			>Watch the film on youtube
 			<div class="scale-y-[-100%] text-lg"><IconArrowCorner /></div>
 		</a>
