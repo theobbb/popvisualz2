@@ -6,7 +6,7 @@
 
 	let pokemon_open = $state(page.route.id == '/');
 
-	let menu_open = $state(true);
+	let menu_open = $state(false);
 
 	const links = [
 		['Home (Reel)', '/'],
