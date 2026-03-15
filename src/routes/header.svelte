@@ -147,11 +147,25 @@
 		closedby="any"
 		class={['m-auto']}
 		onclose={() => (contact_open = false)}
+		onclick={(e) => {
+			const rect = e.currentTarget.getBoundingClientRect();
+			const clickedOutside =
+				e.clientX < rect.left ||
+				e.clientX > rect.right ||
+				e.clientY < rect.top ||
+				e.clientY > rect.bottom;
+
+			if (clickedOutside) {
+				e.stopPropagation();
+				contact_open = false;
+			}
+		}}
 	>
 		<div class="flex max-w-63 flex-col">
 			<div class=""><PokemonJosh big /></div>
 		</div>
 	</dialog>
+	<div class="fixed top-4 right-4 z-1000">Close</div>
 	<!-- <div class="fixed inset-0 z-500 flex items-center justify-center bg-black/50 backdrop-blur-2xl">
 		<div class=""><PokemonJosh /></div>
 	</div> -->
