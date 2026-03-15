@@ -7,6 +7,7 @@
 	let pokemon_open = $state(page.route.id == '/');
 
 	let menu_open = $state(false);
+	let contact_open = $state(false);
 
 	const links = [
 		['Home (Reel)', '/'],
@@ -15,6 +16,14 @@
 	];
 
 	const current_link = $derived(links.find((link) => page.route.id == link[1]));
+
+	$effect(() => {
+		if (menu_open) {
+			document.documentElement.style.overflow = 'hidden';
+		} else {
+			document.documentElement.style.overflow = 'auto';
+		}
+	});
 
 	onNavigate((nav) => {
 		pokemon_open = nav.to?.route.id == '/';
@@ -63,9 +72,12 @@
 			<div>Pop Visualz</div>
 		</a>
 
-		<button onclick={() => (menu_open = !menu_open)} class="-mt-2 text-right text-2xl"
-			>Menu(+)</button
+		<button
+			onclick={() => (menu_open = !menu_open)}
+			class="-mt-2 cursor-pointer text-right text-2xl"
 		>
+			Menu({menu_open ? '-' : '+'})
+		</button>
 	</nav>
 
 	<div
@@ -79,15 +91,17 @@
 		<div class="">
 			<div class="w-fit opacity-0">*</div>
 			<div class="w-fit opacity-0">*</div>
-			<div class="origin-top-left scale-80">
-				<PokemonJosh />
+			<div class="origin-top-left scale-62">
+				<div class="max-w-52 cursor-pointer" onclick={() => (contact_open = true)}>
+					<div class="pointer-events-none"><PokemonJosh /></div>
+				</div>
 			</div>
 		</div>
 		<div class={['mr-1 text-right ']}>
-			<div class="opacity-0">*</div>
+			<div class="opacity-0" aria-hidden="true">*</div>
 
 			{#each links as [link, href]}
-				<div class="opacity-0">*</div>
+				<div class="opacity-0" aria-hidden="true">*</div>
 				<div
 					class={[
 						'absolute size-2.5 -translate-x-3 translate-y-2.5 rounded-full bg-white ',
@@ -99,6 +113,12 @@
 					{link}
 				</a>
 			{/each}
+			<div class="opacity-0" aria-hidden="true">*</div>
+			<div class="relative">
+				<button class="cursor-pointer" onclick={() => (contact_open = !contact_open)}>
+					Contact ({pokemon_open ? '-' : '+'})
+				</button>
+			</div>
 		</div>
 	</div>
 </header>
@@ -117,19 +137,41 @@
 		'transition duration-75'
 	]}
 >
-	<PokemonJosh />
+	<div class="max-w-52"><PokemonJosh /></div>
 </div>
+
+{#if contact_open}
+	<div class="fixed inset-0 z-200"></div>
+	<dialog
+		{@attach (el) => el.showModal()}
+		closedby="any"
+		class={['m-auto']}
+		onclose={() => (contact_open = false)}
+	>
+		<div class="flex max-w-63 flex-col">
+			<div class=""><PokemonJosh big /></div>
+		</div>
+	</dialog>
+	<!-- <div class="fixed inset-0 z-500 flex items-center justify-center bg-black/50 backdrop-blur-2xl">
+		<div class=""><PokemonJosh /></div>
+	</div> -->
+{/if}
 
 {#if page.route.id == '/' || menu_open}
 	<div class={['chaos-footer-mobile container']}><ChaosFooter /></div>
 {/if}
 
 <style>
-	@media (max-height: 800px) {
-		.chaos-footer {
-			/* Scale becomes a function of the viewport height */
-
-			transform: scale(0.5);
-		}
+	dialog {
+		color: inherit;
+		font-family: inherit;
+		border: none;
+		box-shadow: none;
+		outline: none;
+	}
+	dialog::backdrop {
+		background-color: rgba(0, 0, 0, 0.5);
+		/* backdrop-filter: brightness(0.5); */
+		backdrop-filter: blur(5px);
 	}
 </style>

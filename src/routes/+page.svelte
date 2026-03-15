@@ -40,7 +40,7 @@
 <div onclick={() => goto('/featured-projects')} class="fixed inset-0 cursor-pointer"></div>
 
 <div
-	class="pointer-events-none fixed top-0 left-6 mix-blend-difference"
+	class="pointer-events-none fixed top-0 left-6 mix-blend-difference max-md:hidden"
 	style="transform: translate({mouse.x}px, {mouse.y}px);"
 >
 	<div class="flex gap-1">
