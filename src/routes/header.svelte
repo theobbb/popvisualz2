@@ -116,7 +116,7 @@
 			<div class="opacity-0" aria-hidden="true">*</div>
 			<div class="relative">
 				<button class="cursor-pointer" onclick={() => (contact_open = !contact_open)}>
-					Contact ({pokemon_open ? '-' : '+'})
+					Contact (+)
 				</button>
 			</div>
 		</div>
