@@ -2,7 +2,7 @@ export const ARCHIVE_PATH = '/videos/archive-3.zip';
 
 export const chars = [
 	'CINNAMON__________',
-	'HERE_I_GO_AGAIN___',
+	// 'HERE_I_GO_AGAIN___',
 	'PA_LA_______ISLA__',
 	'U_SAID____________',
 	'FAN______SERVICE__',
@@ -16,8 +16,8 @@ export const chars = [
 export const char_map = [
 	[5, 12, 8, 3, 16, 7],
 	[9, 2, 14, 6, 11, 4],
-	[17, 5, 10, 13, 8, 1],
-	[3, 15, 9, 12, 7, 18],
+	// [17, 5, 10, 13, 8, 1],
+	// [3, 15, 9, 12, 7, 18],
 	[14, 6, 2, 11, 4, 16],
 	[10, 8, 17, 5, 13, 9],
 	[7, 3, 15, 1, 12, 14],
@@ -54,15 +54,15 @@ export const projects: Project[] = [
 		date: '23-09-2025',
 		youtube_url: 'https://www.youtube.com/watch?v=5N_2rJ-Jgpc'
 	},
-	{
-		name: 'Here I Go Again',
-		artist: 'Mulan',
-		slug: 'here-i-go-again',
-		video_playback_id: 'S7uWEBdjR901mwh7kLAiD9LWOQPllBjZaRPVRj00MBLNw',
-		aspect_ratio: '1920/817',
-		date: '19-09-2025',
-		youtube_url: 'https://www.youtube.com/watch?v=WUWEnD7bzdM'
-	},
+	// {
+	// 	name: 'Here I Go Again',
+	// 	artist: 'Mulan',
+	// 	slug: 'here-i-go-again',
+	// 	video_playback_id: 'S7uWEBdjR901mwh7kLAiD9LWOQPllBjZaRPVRj00MBLNw',
+	// 	aspect_ratio: '1920/817',
+	// 	date: '19-09-2025',
+	// 	youtube_url: 'https://www.youtube.com/watch?v=WUWEnD7bzdM'
+	// },
 	{
 		name: 'Pa La Isla',
 		artist: 'Ozcar',
